@@ -3,155 +3,183 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NameNest | Instant Name Generator</title>
+<title>NameNest | Smart Name Generator</title>
 
 <style>
-/* =========================
-   BASE DESIGN SYSTEM
-========================= */
-
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto;
 }
 
 body {
   background: radial-gradient(circle at top, #0b1220, #111827);
   color: #f8fafc;
+  overflow-x:hidden;
 }
 
-/* =========================
-   NAVBAR
-========================= */
-
+/* NAV */
 .navbar {
-  width: 100%;
-  padding: 14px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0,0,0,0.25);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  position: sticky;
-  top: 0;
+  width:100%;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:sticky;
+  top:0;
+  z-index:10;
 }
 
-.logo {
-  font-weight: 700;
-  letter-spacing: 0.3px;
-}
+.logo { font-weight:700; }
 
 .links a {
-  color: rgba(255,255,255,0.7);
-  text-decoration: none;
-  margin-left: 14px;
-  font-size: 14px;
+  color:rgba(255,255,255,0.7);
+  text-decoration:none;
+  margin-left:14px;
+  font-size:14px;
 }
 
-.links a:hover {
-  color: white;
-}
-
-/* =========================
-   HERO SECTION
-========================= */
-
+/* HERO */
 .hero {
-  text-align: center;
-  margin-top: 70px;
-  padding: 0 20px;
+  text-align:center;
+  margin-top:70px;
+  animation: fadeIn 0.8s ease;
 }
 
 .hero h1 {
-  font-size: 52px;
-  letter-spacing: -1px;
+  font-size:52px;
+  letter-spacing:-1px;
 }
 
 .hero p {
-  margin-top: 10px;
-  opacity: 0.65;
-  font-size: 16px;
+  margin-top:10px;
+  opacity:0.65;
 }
 
-/* SEARCH BOX (IMPORTANT UX ELEMENT) */
-
+/* SEARCH */
 .search-box {
-  margin: 30px auto;
-  width: 92%;
-  max-width: 520px;
-  display: flex;
-  gap: 10px;
+  margin:30px auto;
+  width:92%;
+  max-width:520px;
+  display:flex;
+  gap:10px;
+  animation: slideUp 0.8s ease;
 }
 
 .search-box input {
-  flex: 1;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.04);
-  color: white;
-  outline: none;
+  flex:1;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.04);
+  color:white;
+  outline:none;
 }
 
 .search-box button {
-  padding: 14px 16px;
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  font-weight: 600;
-  background: linear-gradient(135deg, #38bdf8, #8b5cf6);
-  color: #0b0f19;
+  padding:14px 16px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:600;
+  background:linear-gradient(135deg,#38bdf8,#8b5cf6);
+  color:#0b0f19;
+  transition:0.2s ease;
 }
 
-/* =========================
-   CATEGORY GRID
-========================= */
+.search-box button:hover {
+  transform:scale(1.05);
+}
 
+/* GRID */
 .grid {
-  margin: 40px auto;
-  width: 92%;
-  max-width: 900px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 14px;
+  margin:40px auto;
+  width:92%;
+  max-width:900px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:14px;
 }
 
+/* CARD */
 .card {
-  padding: 18px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-  text-decoration: none;
-  color: white;
-  transition: 0.2s ease;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  text-decoration:none;
+  color:white;
+  transition:0.25s ease;
+  opacity:0;
+  transform:translateY(20px);
+  animation: fadeInUp 0.6s forwards;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  background: rgba(255,255,255,0.06);
+  transform:translateY(-6px);
+  background:rgba(255,255,255,0.06);
 }
 
-.card h3 {
-  margin-bottom: 6px;
+.card h3 { margin-bottom:6px; }
+.card p { opacity:0.6; font-size:13px; }
+
+/* RESULT BOX (SEARCH OUTPUT) */
+.result-box {
+  margin:30px auto;
+  width:92%;
+  max-width:520px;
+  display:none;
+  animation: fadeIn 0.4s ease;
 }
 
-.card p {
-  opacity: 0.6;
-  font-size: 13px;
+.item {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 14px;
+  margin-top:10px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
 }
 
-/* =========================
-   FOOTER TEXT
-========================= */
+.copy {
+  padding:6px 10px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  background:rgba(34,197,94,0.15);
+  color:#22c55e;
+}
 
+/* FOOTER */
 .footer {
-  text-align: center;
-  margin: 50px 0;
-  opacity: 0.5;
-  font-size: 13px;
+  text-align:center;
+  margin:60px 0;
+  opacity:0.5;
+  font-size:13px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+@keyframes slideUp {
+  from { transform:translateY(20px); opacity:0; }
+  to { transform:translateY(0); opacity:1; }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 </style>
 </head>
@@ -172,43 +200,106 @@ body {
 <!-- HERO -->
 <div class="hero">
   <h1>Find the perfect name instantly</h1>
-  <p>Gaming, anime, business, and aesthetic names in seconds</p>
+  <p>Type anything and get AI-style name ideas</p>
 </div>
 
-<!-- SEARCH BOX (UI ONLY FOR NOW) -->
+<!-- SEARCH BOX -->
 <div class="search-box">
-  <input type="text" placeholder="Try: cool anime name, gamer tag, brand name..." />
-  <button onclick="alert('Use categories below')">Generate</button>
+  <input id="input" type="text" placeholder="Try: anime name, gamer tag, brand name..." />
+  <button onclick="generateSmart()">Generate</button>
 </div>
+
+<!-- SEARCH RESULTS -->
+<div id="results" class="result-box"></div>
 
 <!-- CATEGORY GRID -->
 <div class="grid">
 
-  <a class="card" href="gaming.html">
+  <a class="card" href="gaming.html" style="animation-delay:0.1s">
     <h3>🎮 Gaming Names</h3>
-    <p>Epic gamer tags for Roblox, Fortnite, Xbox</p>
+    <p>Epic gamer tags for Roblox, Fortnite</p>
   </a>
 
-  <a class="card" href="anime.html">
+  <a class="card" href="anime.html" style="animation-delay:0.2s">
     <h3>⚡ Anime Names</h3>
     <p>Japanese-inspired fantasy names</p>
   </a>
 
-  <a class="card" href="business.html">
+  <a class="card" href="business.html" style="animation-delay:0.3s">
     <h3>💼 Business Names</h3>
-    <p>Startup & brand name ideas</p>
+    <p>Startup & brand ideas</p>
   </a>
 
-  <a class="card" href="cute.html">
+  <a class="card" href="cute.html" style="animation-delay:0.4s">
     <h3>🌸 Cute Names</h3>
-    <p>Aesthetic usernames & soft names</p>
+    <p>Aesthetic usernames</p>
   </a>
 
 </div>
 
 <div class="footer">
-  NameNest — simple, fast, name generation
+  NameNest — smart name generation tool
 </div>
+
+<script>
+function copy(t){
+  navigator.clipboard.writeText(t);
+}
+
+/* SMART GENERATOR */
+function generateSmart(){
+  const input = document.getElementById("input").value.toLowerCase();
+  const box = document.getElementById("results");
+
+  box.style.display = "block";
+  box.innerHTML = "";
+
+  let p = [];
+  let s = [];
+
+  // DETECT INTENT
+  if(input.includes("anime") || input.includes("japan")){
+    p = ["Akira","Rin","Sora","Kuro","Yuki","Kai"];
+    s = ["Senpai","Kage","Soul","Blade","Storm","Zero"];
+  }
+  else if(input.includes("business") || input.includes("brand")){
+    p = ["Nova","Prime","Urban","Echo","Core","Elite"];
+    s = ["Labs","Studios","Works","Co","Group","Media"];
+  }
+  else if(input.includes("cute") || input.includes("aesthetic")){
+    p = ["Mochi","Bunny","Fluffy","Honey","Cherry","Kitty"];
+    s = ["Pop","Boo","Luv","Bean","Spark","Pie"];
+  }
+  else {
+    // default gaming
+    p = ["Xeno","Dark","Neo","Cyber","Void","Storm"];
+    s = ["Blade","Wolf","Sniper","Hunter","Nova","Ghost"];
+  }
+
+  for(let i=0;i<10;i++){
+    const name =
+      p[Math.floor(Math.random()*p.length)] +
+      s[Math.floor(Math.random()*s.length)] +
+      Math.floor(Math.random()*99);
+
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <span>${name}</span>
+      <button class="copy" onclick="copy('${name}')">Copy</button>
+    `;
+
+    box.appendChild(div);
+  }
+}
+
+/* ENTER KEY SUPPORT */
+document.getElementById("input").addEventListener("keypress", function(e){
+  if(e.key === "Enter"){
+    generateSmart();
+  }
+});
+</script>
 
 </body>
 </html>
