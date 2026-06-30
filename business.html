@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Business Name Generator | Startup & Brand Names | NameNest</title>
+  <meta name="description" content="Generate professional business names and startup ideas instantly. Perfect for brands, companies, and online stores." />
+  <meta name="keywords" content="business names, company name generator, startup names, brand names, shop names" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui;
+      background: radial-gradient(circle at top, #1e293b, #0f172a);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero { text-align: center; margin-top: 60px; }
+    h1 { font-size: 42px; }
+    p { opacity: 0.7; }
+
+    .card {
+      margin-top: 30px;
+      width: 90%;
+      max-width: 520px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #38bdf8, #a78bfa);
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      margin-top: 10px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+    }
+
+    .copy {
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      background: #22c55e;
+      color: black;
+      font-weight: bold;
+    }
+
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+      display: block;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero">
+    <h1>Business Name Generator</h1>
+    <p>Create powerful brand names instantly</p>
+  </div>
+
+  <div class="card">
+
+    <button class="btn" onclick="generate()">Generate Names 💼</button>
+
+    <div id="list"></div>
+
+    <a href="index.html">← Back Home</a>
+    <a href="anime.html">Anime Names →</a>
+  </div>
+
+  <script>
+    const p = ["Nova","Prime","Bright","Blue","Golden","Urban","Echo","Next","Core","Elite"];
+    const s = ["Studios","Labs","Works","Solutions","Group","Media","Systems","Agency","Brands","Co"];
+
+    function randomName() {
+      return p[Math.floor(Math.random()*p.length)] +
+             s[Math.floor(Math.random()*s.length)] +
+             Math.floor(Math.random()*99);
+    }
+
+    function copy(t) {
+      navigator.clipboard.writeText(t);
+    }
+
+    function generate() {
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+
+      for (let i = 0; i < 10; i++) {
+        const name = randomName();
+
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <span>${name}</span>
+          <button class="copy" onclick="copy('${name}')">Copy</button>
+        `;
+
+        list.appendChild(div);
+      }
+    }
+
+    generate();
+  </script>
+
+</body>
+</html>
