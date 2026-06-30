@@ -1,232 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NameNest</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gaming Name Generator | NameNest</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, sans-serif;
-    }
+<style>
+body {
+  margin:0;
+  font-family:system-ui;
+  background: radial-gradient(circle at top, #1e293b, #0f172a);
+  color:white;
+}
 
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle at top, #1e293b, #0f172a);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+/* NAV */
+.navbar {
+  width:100%;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+}
 
-    .hero {
-      text-align: center;
-      margin-top: 60px;
-      padding: 0 20px;
-    }
+.links a {
+  color:rgba(255,255,255,0.75);
+  text-decoration:none;
+  margin-left:12px;
+  font-size:14px;
+}
 
-    h1 {
-      font-size: 48px;
-    }
+/* HERO */
+.hero { text-align:center; margin-top:30px; }
+.hero h1 { font-size:42px; }
+.hero p { opacity:0.7; }
 
-    p {
-      opacity: 0.7;
-      margin-top: 8px;
-    }
+/* CARD */
+.card {
+  margin:30px auto;
+  width:90%;
+  max-width:520px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.06);
+}
 
-    .card {
-      margin-top: 35px;
-      width: 90%;
-      max-width: 520px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(12px);
-      border-radius: 18px;
-      padding: 18px;
-    }
+.btn {
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  font-weight:bold;
+  background:linear-gradient(135deg,#38bdf8,#a78bfa);
+  color:black;
+  margin-bottom:15px;
+  cursor:pointer;
+}
 
-    /* CATEGORY BUTTONS */
-    .tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 15px;
-    }
+.item {
+  display:flex;
+  justify-content:space-between;
+  padding:12px;
+  margin-top:10px;
+  background:rgba(255,255,255,0.05);
+  border-radius:12px;
+}
 
-    .tab {
-      padding: 8px 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.05);
-      color: white;
-      cursor: pointer;
-      font-size: 12px;
-      transition: 0.15s ease;
-    }
-
-    .tab:hover {
-      transform: scale(1.05);
-    }
-
-    .active {
-      background: linear-gradient(135deg, #38bdf8, #a78bfa);
-      color: black;
-      font-weight: 600;
-    }
-
-    /* GENERATE BUTTON */
-    .generate-btn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      background: linear-gradient(135deg, #38bdf8, #a78bfa);
-      color: black;
-      transition: 0.15s ease;
-      margin-bottom: 15px;
-    }
-
-    .generate-btn:hover {
-      transform: scale(1.02);
-    }
-
-    /* LIST */
-    .list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .name {
-      font-size: 15px;
-      letter-spacing: 0.5px;
-    }
-
-    .copy-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      background: rgba(34,197,94,0.2);
-      color: #22c55e;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .copy-btn:hover {
-      background: rgba(34,197,94,0.35);
-    }
-
-  </style>
+.copy {
+  background:#22c55e;
+  border:none;
+  border-radius:8px;
+  padding:6px 10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="hero">
-    <h1>NameNest</h1>
-    <p>Generate names instantly</p>
+<nav class="navbar">
+  <div class="logo">NameNest</div>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="anime.html">Anime</a>
+    <a href="business.html">Business</a>
+    <a href="cute.html">Cute</a>
   </div>
+</nav>
 
-  <div class="card">
+<div class="hero">
+<h1>Gaming Names</h1>
+<p>Create epic gamer tags</p>
+</div>
 
-    <div class="tabs">
-      <button class="tab active" onclick="setCategory('gaming', this)">Gaming</button>
-      <button class="tab" onclick="setCategory('anime', this)">Anime</button>
-      <button class="tab" onclick="setCategory('business', this)">Business</button>
-      <button class="tab" onclick="setCategory('cute', this)">Cute</button>
-    </div>
+<div class="card">
+<button class="btn" onclick="generate()">Generate</button>
+<div id="list"></div>
+</div>
 
-    <button class="generate-btn" onclick="generateNames()">
-      Generate Names ✨
-    </button>
+<script>
+const p=["Xeno","Dark","Neo","Cyber","Void","Storm","Shadow","Pixel"];
+const s=["Blade","Wolf","Sniper","Hunter","Nova","Ghost","Strike","Drift"];
 
-    <div id="results" class="list"></div>
-  </div>
+function random(){
+  return p[Math.floor(Math.random()*p.length)] +
+         s[Math.floor(Math.random()*s.length)] +
+         Math.floor(Math.random()*99);
+}
 
-  <script>
-    let category = "gaming";
+function copy(t){ navigator.clipboard.writeText(t); }
 
-    const data = {
-      gaming: {
-        prefixes: ["Xeno","Dark","Neo","Ultra","Cyber","Void","Storm","Shadow","Pixel","Lunar"],
-        suffixes: ["Blade","Wolf","Sniper","Hunter","Nova","Fury","Ghost","Strike","Phantom","Drift"]
-      },
+function generate(){
+  const list=document.getElementById("list");
+  list.innerHTML="";
+  for(let i=0;i<10;i++){
+    const name=random();
+    const div=document.createElement("div");
+    div.className="item";
+    div.innerHTML=`<span>${name}</span>
+    <button class="copy" onclick="copy('${name}')">Copy</button>`;
+    list.appendChild(div);
+  }
+}
 
-      anime: {
-        prefixes: ["Akira","Rin","Sora","Kuro","Hana","Yuki","Ren","Kai","Aoi","Shin"],
-        suffixes: ["Senpai","Kage","Soul","Spirit","Blade","Storm","Zero","Star","Moon","Ray"]
-      },
-
-      business: {
-        prefixes: ["Nova","Prime","Bright","Blue","Golden","Urban","Echo","Next","Core","Elite"],
-        suffixes: ["Studios","Labs","Works","Solutions","Group","Media","Systems","Agency","Brands","Co"]
-      },
-
-      cute: {
-        prefixes: ["Bunny","Fluffy","Sweet","Mochi","Cookie","Panda","Cherry","Honey","Kitty","Lily"],
-        suffixes: ["Pop","Boo","Luv","Puff","Bean","Spark","Cup","Joy","Star","Pie"]
-      }
-    };
-
-    function setCategory(cat, btn) {
-      category = cat;
-
-      document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      generateNames();
-    }
-
-    function randomName() {
-      const set = data[category];
-      const p = set.prefixes[Math.floor(Math.random() * set.prefixes.length)];
-      const s = set.suffixes[Math.floor(Math.random() * set.suffixes.length)];
-      return p + s + Math.floor(Math.random() * 99);
-    }
-
-    function copyText(text) {
-      navigator.clipboard.writeText(text);
-    }
-
-    function generateNames() {
-      const results = document.getElementById("results");
-      results.innerHTML = "";
-
-      for (let i = 0; i < 10; i++) {
-        const name = randomName();
-
-        const div = document.createElement("div");
-        div.className = "item";
-
-        div.innerHTML = `
-          <span class="name">${name}</span>
-          <button class="copy-btn" onclick="copyText('${name}')">⧉</button>
-        `;
-
-        results.appendChild(div);
-      }
-    }
-
-    generateNames();
-  </script>
+generate();
+</script>
 
 </body>
 </html>
