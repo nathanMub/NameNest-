@@ -48,6 +48,36 @@
       padding: 18px;
     }
 
+    /* CATEGORY BUTTONS */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .tab {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      cursor: pointer;
+      font-size: 12px;
+      transition: 0.15s ease;
+    }
+
+    .tab:hover {
+      transform: scale(1.05);
+    }
+
+    .active {
+      background: linear-gradient(135deg, #38bdf8, #a78bfa);
+      color: black;
+      font-weight: 600;
+    }
+
+    /* GENERATE BUTTON */
     .generate-btn {
       width: 100%;
       padding: 12px;
@@ -65,6 +95,7 @@
       transform: scale(1.02);
     }
 
+    /* LIST */
     .list {
       display: flex;
       flex-direction: column;
@@ -98,7 +129,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: 0.15s ease;
     }
 
     .copy-btn:hover {
@@ -116,20 +146,59 @@
   </div>
 
   <div class="card">
+
+    <div class="tabs">
+      <button class="tab active" onclick="setCategory('gaming', this)">Gaming</button>
+      <button class="tab" onclick="setCategory('anime', this)">Anime</button>
+      <button class="tab" onclick="setCategory('business', this)">Business</button>
+      <button class="tab" onclick="setCategory('cute', this)">Cute</button>
+    </div>
+
     <button class="generate-btn" onclick="generateNames()">
-      Generate Gamer Tags 🎮
+      Generate Names ✨
     </button>
 
     <div id="results" class="list"></div>
   </div>
 
   <script>
-    const prefixes = ["Xeno","Dark","Neo","Ultra","Cyber","Void","Storm","Shadow","Pixel","Lunar"];
-    const suffixes = ["Blade","Wolf","Sniper","Hunter","Nova","Fury","Ghost","Strike","Phantom","Drift"];
+    let category = "gaming";
+
+    const data = {
+      gaming: {
+        prefixes: ["Xeno","Dark","Neo","Ultra","Cyber","Void","Storm","Shadow","Pixel","Lunar"],
+        suffixes: ["Blade","Wolf","Sniper","Hunter","Nova","Fury","Ghost","Strike","Phantom","Drift"]
+      },
+
+      anime: {
+        prefixes: ["Akira","Rin","Sora","Kuro","Hana","Yuki","Ren","Kai","Aoi","Shin"],
+        suffixes: ["Senpai","Kage","Soul","Spirit","Blade","Storm","Zero","Star","Moon","Ray"]
+      },
+
+      business: {
+        prefixes: ["Nova","Prime","Bright","Blue","Golden","Urban","Echo","Next","Core","Elite"],
+        suffixes: ["Studios","Labs","Works","Solutions","Group","Media","Systems","Agency","Brands","Co"]
+      },
+
+      cute: {
+        prefixes: ["Bunny","Fluffy","Sweet","Mochi","Cookie","Panda","Cherry","Honey","Kitty","Lily"],
+        suffixes: ["Pop","Boo","Luv","Puff","Bean","Spark","Cup","Joy","Star","Pie"]
+      }
+    };
+
+    function setCategory(cat, btn) {
+      category = cat;
+
+      document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      generateNames();
+    }
 
     function randomName() {
-      const p = prefixes[Math.floor(Math.random() * prefixes.length)];
-      const s = suffixes[Math.floor(Math.random() * suffixes.length)];
+      const set = data[category];
+      const p = set.prefixes[Math.floor(Math.random() * set.prefixes.length)];
+      const s = set.suffixes[Math.floor(Math.random() * set.suffixes.length)];
       return p + s + Math.floor(Math.random() * 99);
     }
 
@@ -155,6 +224,8 @@
         results.appendChild(div);
       }
     }
+
+    generateNames();
   </script>
 
 </body>
